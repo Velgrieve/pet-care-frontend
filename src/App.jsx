@@ -1,55 +1,59 @@
 import { useEffect } from "react"
 import { createOrUpdatePet, deletePet, getAllPets, getPetById } from "./services/main/pets"
+import PetList from "./components/petsList";
+import CreatePet from "./components/petsCreate";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  useEffect(() => {
-    //Permitir cancelar um pedido ao servidor
-    const abortController = new AbortController();
+  // useEffect(() => {
+  //   //Permitir cancelar um pedido ao servidor
+  //   const abortController = new AbortController();
 
-    async function test() {
-      const data = {
-        name: "Bobby",
-        dateOfBirth: "2019-01-01",
-        breed: "Bulldog",
-      }
+  //   async function test() {
+  //     const data = {
+  //       name: "Bobby",
+  //       dateOfBirth: "2019-01-01",
+  //       breed: "Bulldog",
+  //     }
 
-      const petCreated = await createOrUpdatePet(data)
+  //     const petCreated = await createOrUpdatePet(data)
       
-      console.log(petCreated)
+  //     console.log(petCreated)
 
-      const allPets = await getAllPets()
+  //     const allPets = await getAllPets()
 
-      console.log(allPets)
+  //     console.log(allPets)
 
-      petCreated.name = "Fisher"
-      const petUpdated = await createOrUpdatePet(petCreated)
+  //     petCreated.name = "Fisher"
+  //     const petUpdated = await createOrUpdatePet(petCreated)
 
-      console.log(petUpdated)
+  //     console.log(petUpdated)
 
-      const pet = await getPetById(petUpdated.id)
+  //     const pet = await getPetById(petUpdated.id)
 
-      console.log(pet)
+  //     console.log(pet)
 
-      await deletePet(petUpdated.id)
+  //     await deletePet(petUpdated.id)
 
-      const allPetsAfterDelete = await getAllPets()
+  //     const allPetsAfterDelete = await getAllPets()
 
-      console.log(allPetsAfterDelete)
+  //     console.log(allPetsAfterDelete)
 
-    }
+  //   }
 
-    test()
+  //   test()
 
-    return () => {
-      //Cancelar o pedido caso o componente seja desmontado
-      abortController.abort();
-    };
-  }, [])
-
+  //   return () => {
+  //     //Cancelar o pedido caso o componente seja desmontado
+  //     abortController.abort();
+  //   };
+  // }, [])
 
   return (
     <>
       <h1>Base project</h1>
+
+      <Outlet/>
     </>
   )
 }
